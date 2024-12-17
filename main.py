@@ -17,6 +17,7 @@ count = 0
 min_number = float('inf')
 current_number = ""
 is_negative = False
+five_digit_numbers = []
     
 
 with open('input.txt', 'r') as f:
@@ -24,6 +25,7 @@ with open('input.txt', 'r') as f:
         char = f.read(1)
         if not char:
             break
+
         if char == '-':
             if not current_number:
                 is_negative = True
@@ -34,6 +36,7 @@ with open('input.txt', 'r') as f:
                     if is_negative:
                         number_int = -number_int
                     min_number = min(min_number, number_int)
+                    five_digit_numbers.append(number_int)
                 is_negative = False
                 current_number = ""
 
@@ -47,6 +50,7 @@ with open('input.txt', 'r') as f:
                 if is_negative:
                     number_int = -number_int
                 min_number = min(min_number, number_int)
+                five_digit_numbers.append(number_int)
             is_negative = False
             current_number = ""
 
@@ -56,6 +60,11 @@ with open('input.txt', 'r') as f:
         if is_negative:
             number_int = -number_int
         min_number = min(min_number, number_int)
+        five_digit_numbers.append(number_int)
+    
+if five_digit_numbers:
+    print("Найденные 5-значные числа:")
+    print(*five_digit_numbers)
 
 print(f"Количество 5-значных чисел: {count}")
 
@@ -63,9 +72,7 @@ if min_number != float('inf'):
     min_number_str = str(min_number)
     print("Минимальное число прописью (цифрами): ", end="")
     if min_number_str[0] == '-':
-        print("- минус", end=" ")
+        print("минус", end=" ")
         min_number_str = min_number_str[1:]
-        for digit in min_number_str:
-            print(digit + ' ' + digit_map[digit], end=" ")
-else:
-    print("Пятизначные числа в файле не найдены.")
+    for digit in min_number_str:
+        print(digit_map[digit], end=" ")
