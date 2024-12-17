@@ -9,16 +9,15 @@
 #Минимальное число вывести прописью.
 
 digit_map = {
-        '0': 'ноль', '1': 'один', '2': 'два', '3': 'три', '4': 'четыре',
-        '5': 'пять', '6': 'шесть', '7': 'семь', '8': 'восемь', '9': 'девять'
-    }
+    '-': 'минус', '0': 'ноль', '1': 'один', '2': 'два', '3': 'три', '4': 'четыре',
+    '5': 'пять', '6': 'шесть', '7': 'семь', '8': 'восемь', '9': 'девять'
+}
 
 count = 0
 min_number = float('inf')
 current_number = ""
 is_negative = False
 five_digit_numbers = []
-    
 
 with open('input.txt', 'r') as f:
     while True:
@@ -28,7 +27,7 @@ with open('input.txt', 'r') as f:
 
         if char == '-':
             if not current_number:
-                is_negative = True
+                         is_negative = True
             else:
                 if current_number and len(current_number) == 5:
                     count += 1
@@ -71,8 +70,7 @@ print(f"Количество 5-значных чисел: {count}")
 if min_number != float('inf'):
     min_number_str = str(min_number)
     print("Минимальное число прописью (цифрами): ", end="")
-    if min_number_str[0] == '-':
-        print("минус", end=" ")
-        min_number_str = min_number_str[1:]
-    for digit in min_number_str:
-        print(digit_map[digit], end=" ")
+    for char in min_number_str:
+        print(char + ' ' + digit_map[char], end=" ")
+else:
+    print("Пятизначные числа в файле не найдены.")
