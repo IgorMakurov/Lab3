@@ -17,28 +17,24 @@ count = 0
 min_number = float('inf')
 current_number = ""
 
-try:
-    with open('input.txt', 'r') as f:
-        while True:
-            char = f.read(1)
-            if not char:
-                break
+with open('input.txt', 'r') as f:
+    while True:
+        char = f.read(1)
+        if not char:
+            break
 
-            if char.isdigit():
-                current_number += char
-            elif current_number:
-                if len(current_number) == 5:
-                    count += 1
-                    number_int = int(current_number)
-                    min_number = min(min_number, number_int)
-                current_number = ""
-        if current_number and len(current_number) == 5:
-            count += 1
-            number_int = int(current_number)
-            min_number = min(min_number, number_int)
-
-except FileNotFoundError:
-    print(f"Ошибка: Файл '{file_path}' не найден.")
+        if char.isdigit():
+            current_number += char
+        elif current_number:
+            if len(current_number) == 5:
+                count += 1
+                number_int = int(current_number)
+                min_number = min(min_number, number_int)
+            current_number = ""
+    if current_number and len(current_number) == 5:
+        count += 1
+        number_int = int(current_number)
+        min_number = min(min_number, number_int)
 
 print(f"Количество 5-значных чисел: {count}")
 
